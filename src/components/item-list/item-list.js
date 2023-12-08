@@ -4,7 +4,6 @@ import SwapiService from "../services/swapi-serv";
 
 export default class Item extends Component {
     render() {
-        console.log(this.props)
         const ifNoOverview = 'Что вершит судьбу человечества в этом мире?' +
                     ' Некое незримое существо или закон, подобно Длани Господней' +
                     ' парящей над миром? По крайне мере истинно то, что человек не' +
