@@ -3,14 +3,12 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 
 const loadingStyle = {
-    // display:'flex',
-    backgroundColor: 'gray',
     height: '100vh',
     display: 'flex',
     justifyContent: 'center'
 }
 const loadingCircleStyle = {
-    fontSize: 150,
+    fontSize: 70,
     display: 'flex',
     alignSelf: 'center'
 }
