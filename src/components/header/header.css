@@ -1,6 +1,49 @@
-.mainDiv{
-    height: 100px;
-    width: 100px;
-    background-color: #0dbf92;
-    color: #0dbf92;
+.style1 {
+    max-width: 100%;
+    min-width: 10rem;
+    margin: 20px 100px 20px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
 }
+@media (max-width: 1024px) {
+    .style1 {
+        max-width: 100%;
+        min-width: 10rem;
+        margin: 20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+}
+/*@media (max-width: 426px) {*/
+/*    .style1 {*/
+/*        max-width: 10%;*/
+/*        min-width: 10rem;*/
+/*        margin: 20px 100px 20px 100px;*/
+/*        display: flex;*/
+/*        flex-direction: row;*/
+/*        flex-wrap: wrap;*/
+/*        justify-content: center;*/
+
+/*    }*/
+/*}*/
+
+.styleNoResults {
+    max-width: 100%;
+    min-width: 20rem;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: gray;
+}
+
+.style2 {
+    display: flex;
+    flex-direction: column;
+}
+

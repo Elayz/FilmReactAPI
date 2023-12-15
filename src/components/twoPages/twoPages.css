@@ -1,0 +1,15 @@
+.stylePagination {
+    align-self: center;
+    display: flex;
+    color: black;
+    flex-direction: row;
+}
+
+.stylePagination p {
+    padding: 5px;
+    margin: 5px;
+}
+.stylePagination p:hover {
+    border-bottom: 2px solid #2a7aaf;
+    padding-bottom: 3px;
+}

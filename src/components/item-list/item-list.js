@@ -30,7 +30,8 @@ export default class Item extends Component {
             minWidth: '35rem',
             backgroundColor: 'white',
             boxShadow: '15px 15px 30px gray',
-            margin: '10px'
+            marginLeft: 'auto',
+            marginRight: 'auto'
         }
         const styleImg = {
             marginRight: '20px'

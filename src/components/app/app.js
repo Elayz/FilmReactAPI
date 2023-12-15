@@ -7,6 +7,7 @@ import _ from "lodash";
 import InputForm from "../inputForm/input";
 import {Pagination} from "antd";
 import Paginationn from "../pagination/pagination";
+import TwoPages from "../twoPages/twoPages";
 
 const apiRes = new SwapiService()
 export default class App extends Component {
@@ -21,10 +22,11 @@ export default class App extends Component {
             rated: false,
             guestSessionId: null,
             rateValue: null,
+            currentPage: 1,
         };
         this.filmsDataFromServer = () => {
             apiRes
-                .getAllFilms(this.state.inputValue)
+                .getAllFilms(this.state.inputValue, this.state.currentPage)
                 .then((res) => {
                     this.setState({
                         data: res.results,
@@ -37,6 +39,12 @@ export default class App extends Component {
                     });
                 })
         };
+        this.changeCurrentPage = (a) =>{
+            this.setState({
+                currentPage: a,
+            })
+            setTimeout(this.filmsDataFromServer, 0);
+        }
         this.ganreData = () => {
             apiRes
                 .getAllGanre()
@@ -80,7 +88,6 @@ export default class App extends Component {
         this.createGuestSession = () => {
             apiRes.getSessionID()
                 .then((res) => {
-                    console.log(res)
                     this.setState({
                         guestSessionId: res.guest_session_id,
                     })
@@ -88,22 +95,20 @@ export default class App extends Component {
                 })
         }
         this.ratedShow = (a) => {
-            if (a === 2){
-                apiRes.getAllRated(this.state.guestSessionId)
-                    .then((res) => {
-                        this.setState({
-                            data: res.results,
-                            rated: true,
-                        })
+            apiRes.getAllRated(this.state.guestSessionId)
+                .then((res) => {
+                    this.setState({
+                        data: res.results,
+                        rated: true,
                     })
-            }else{
-                this.setState({
-                    data: this.state.dataReserve,
-                    rated: false,
                 })
-            }
-
         };
+        this.ratedUnshow = () => {
+            this.setState({
+                data: this.state.dataReserve,
+                rated: false,
+            })
+        }
         this.ratedAdd = (a, b) => {
             this.setState({
                 rateValue: a,
@@ -128,7 +133,10 @@ export default class App extends Component {
             <div>
                 {this.state.serverError ? <Error></Error> :
                 <div style={mainBlock}>
-                    <Paginationn ratedShow={this.ratedShow}></Paginationn>
+                    <TwoPages
+                        ratedShow={this.ratedShow}
+                        ratedUnshow={this.ratedUnshow}
+                    ></TwoPages>
                     {this.state.rated ?
                         <div style={mainBlock}>
                             {this.state.data && this.state.genres
@@ -160,6 +168,10 @@ export default class App extends Component {
                                 }
                             </div>
                         </div>}
+                    {!this.state.data || this.state.data.length === 0 || this.state.rated
+                        ?<div></div>
+                        :<Paginationn changeCurrentPage={this.changeCurrentPage}></Paginationn>
+                    }
                 </div>}
             </div>
         );

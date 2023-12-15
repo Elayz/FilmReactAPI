@@ -26,12 +26,12 @@ export default class SwapiService {
 
         fetch(url, options)
             .then(response => response.json())
-            .then(response => console.log(response))
+            // .then(response => console.log(response))
             .catch(err => console.error(err));
     }
 
-    async getAllFilms(query){
-        const films = await this.getRes(`${this.urlBase}&query=${query}`);
+    async getAllFilms(query, currentPage){
+        const films = await this.getRes(`${this.urlBase}&query=${query}&page=${currentPage}`);
         return films;
     }
     async getAllGanre(){
@@ -43,12 +43,10 @@ export default class SwapiService {
         return SessionId;
     }
     async getAllRated(sessuonId){
-        console.log(sessuonId)
         const allRated = await this.getRes(`https://api.themoviedb.org/3/guest_session/${sessuonId}/rated/movies?api_key=${this.api_key}`);
         return allRated;
     }
     async pushToRateList(rating, sessuonId, filmID){
-        console.log(rating, sessuonId, filmID)
         const rateList = await this.postRes(`https://api.themoviedb.org/3/movie/${filmID}/rating?guest_session_id=${sessuonId}&session_id=${this.api_key}`, rating);
         return rateList;
     }
