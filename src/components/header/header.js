@@ -17,7 +17,7 @@ export default class Header extends Component {
                     voteAvg={item.vote_average}
                     ratedAdd={this.props.ratedAdd}
                     rated={this.props.rated}
-                    rateValue={this.props.rateValue}
+                    rating={item.rating}
                 ></Item>
             ));
         return (

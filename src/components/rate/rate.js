@@ -11,9 +11,10 @@ export default class RateStar extends Component{
     render() {
         return (
             <Rate
+                defaultValue={this.props.rateValue}
                 onChange={(value) => this.props.ratedAdd(value, this.props.idItem)}
                 style={styleRate}>
             </Rate>
         )
     }
-}
+};

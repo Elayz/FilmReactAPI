@@ -28,6 +28,9 @@ export default class App extends Component {
             apiRes
                 .getAllFilms(this.state.inputValue, this.state.currentPage)
                 .then((res) => {
+                    res.results.map((item) => {
+                        item.rating = 0
+                    });
                     this.setState({
                         data: res.results,
                         dataReserve: res.results,
@@ -95,11 +98,14 @@ export default class App extends Component {
                 })
         }
         this.ratedShow = (a) => {
+            this.setState({
+                data: null,
+                rated: true,
+            })
             apiRes.getAllRated(this.state.guestSessionId)
                 .then((res) => {
                     this.setState({
                         data: res.results,
-                        rated: true,
                     })
                 })
         };
@@ -110,9 +116,16 @@ export default class App extends Component {
             })
         }
         this.ratedAdd = (a, b) => {
-            this.setState({
-                rateValue: a,
+            let ratedData = this.state.data.map((obj) => {
+                if(obj.id === b){
+                    obj.rating = a;
+                }
+                return obj
             })
+            this.setState({
+                dataReserve: ratedData,
+                rateValue: a,
+            });
             apiRes.pushToRateList(a, this.state.guestSessionId, b)
         };
         this.componentDidMount = () => {

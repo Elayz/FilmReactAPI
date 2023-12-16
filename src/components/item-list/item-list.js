@@ -5,6 +5,7 @@ import RateStarReadOnly from "../rateReadOnly/rateReadOnly";
 
 
 export default class Item extends Component {
+
     render() {
         const rankFixed = this.props.voteAvg.toFixed(1);
         const uberRank = this.props.voteAvg.toFixed(0);
@@ -120,7 +121,6 @@ export default class Item extends Component {
         }else if(rankFixed => 7){
             whatRateStyle = circleStyleGood;
         }
-        // console.log(this.props.ratedAdd)
         return (
             <div className="card mb-3" style={style1}>
                     <div>
@@ -150,8 +150,8 @@ export default class Item extends Component {
                                     :  <p style={styleCardText} className="card-text">{truncateText}</p>
                                 }
                                 {!this.props.rated
-                                    ? <RateStar idItem={this.props.idItem} ratedAdd={this.props.ratedAdd}></RateStar>
-                                    : <RateStarReadOnly rateValue={this.props.rateValue}></RateStarReadOnly>
+                                    ? <RateStar rateValue={this.props.rating} idItem={this.props.idItem} ratedAdd={this.props.ratedAdd}></RateStar>
+                                    : <RateStarReadOnly rateValue={this.props.rating}></RateStarReadOnly>
                                 }
                             </div>
                         </div>
